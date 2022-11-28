@@ -2,6 +2,20 @@
 #traivail aujoud'aihui_GIT début :)
 
 
+
+
+
+
+## des remaques d’exercices shell:
+1. chaque fois quand on fait la modification sur notre ordinateur ou sur git, il faut qu'on synchroniser les deux.
+   Lancez la commande "git log" pour voir votre dernier commit.
+   (## au début de ligne signifie une sous section.)
+2. git status utilisé pour vérifier si git a bien détect la modification.
+
+
+
+
+
 25,novembre 22
 
 Aujourd'hui je reprends le traivl de git et mes devoirs. J'ai reglé le problème que la version de mon responsitory n'est plus la dernière version.
