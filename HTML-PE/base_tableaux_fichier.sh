@@ -18,7 +18,7 @@ then
 	exit
 fi
 
-mot="robot" # à modifier
+mot="[Dd]épaysement" # à modifier
 
 echo $fichier_urls;
 basename=$(basename -s .txt $fichier_urls)
@@ -27,16 +27,15 @@ echo "<html><body>" > $fichier_tableau
 echo "<h2>Tableau $basename :</h2>" >> $fichier_tableau
 echo "<br/>" >> $fichier_tableau
 echo "<table>" >> $fichier_tableau
-echo "<tr><th>ligne</th><th>code</th><th>URL</th><th>encodage</th></tr>" >> $fichier_tableau
+echo "<tr><th>ligne</th><th>code</th><th>URL</th><th>encodage</th><th>dump html</th><th>dump text</th><th>occurrences</th><th>contextes</th><th>concordances</th></tr>" >> $fichier_tableau
 
 lineno=1;
 while read -r URL; do
 	echo -e "\tURL : $URL";
 	# la façon attendue, sans l'option -w de cURL
 	code=$(curl -ILs $URL | grep -e "^HTTP/" | grep -Eo "[0-9]{3}" | tail -n 1)
-	charset=$(curl -ILs $URL | grep -Eo "charset=(\w|-)+" | cut -d= -f2)
+	charset=$(curl -Ls $URL -D - -o "./aspirations/$basename-$lineno.html" | grep -Eo "charset=(\w|-)+" | cut -d= -f2)
 
-        aspiration=$(curl $URL>./aspirations/fich1_$lineno.html)
 	# autre façon, avec l'option -w de cURL
 	# code=$(curl -Ls -o /dev/null -w "%{http_code}" $URL)
 	# charset=$(curl -ILs -o /dev/null -w "%{content_type}" $URL | grep -Eo "charset=(\w|-)+" | cut -d= -f2)
@@ -63,10 +62,20 @@ while read -r URL; do
 		dump=""
 		charset=""
 	fi
-	echo "$dump">"dump-text/$basename-$lineno.txt"
-	
+  echo "$dump" > "./dumps-text/$basename-$lineno.txt"
 
-	echo "<tr><td>$lineno</td><td>$code</td><td><a href=\"$URL\">$URL</a></td><td>$charset</td></tr>" >> $fichier_tableau
+  # compte du nombre d'occurrences
+  NB_OCC=$(grep -E -o $mot ./dumps-text/$basename-$lineno.txt | wc -l)
+
+  # extraction des contextes
+
+  grep -E -A2 -B2 $mot ./dumps-text/$basename-$lineno.txt > ./contextes/$basename-$lineno.txt
+
+  # construction des concordance avec une commande externe
+
+  bash programme/concordance.sh ./dumps-text/$basename-$lineno.txt $mot > ./concordances/$basename-$lineno.html
+
+	echo "<tr><td>$lineno</td><td>$code</td><td><a href=\"$URL\">$URL</a></td><td>$charset</td><td><a href="../aspirations/$basename-$lineno.html">html</a></td><td><a href="../dumps-text/$basename-$lineno.txt">text</a></td><td>$NB_OCC</td><td><a href="../contextes/$basename-$lineno.txt">contextes</a></td><td><a href="../concordances/$basename-$lineno.html">concordance</a></td></tr>" >> $fichier_tableau
 	echo -e "\t--------------------------------"
 	lineno=$((lineno+1));
 done < $fichier_urls
