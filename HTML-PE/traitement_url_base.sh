@@ -1,94 +1,97 @@
 #!/usr/bin/env bash
 
 #===============================================================================
-# Ce script est notre programme pour traiter les URLs. Il permet de créer un tableau HTML en sortie avec chaque URL, le code de réponse correspondant .
-# Il s'utilise dans le dossier avec le fichier à traiter <URL.txt> (avec un URL/ligne) avec la ligne de commande :
-# bash traitement_url_base.sh <URL.txt>  <tableauURL.html> 
-
-#<tableauURL.html>  est le fichier de sortie du tableau HTML (ici il n'existe pas avant le lancement du script).
+# VOUS DEVEZ MODIFIER CE BLOC DE COMMENTAIRES.
+# Ici, on décrit le comportement du programme.
+# Indiquez, entre autres, comment on lance le programme et quels sont
+# les paramètres.
+# La forme est indicative, sentez-vous libres d'en changer !
+# Notamment pour quelque chose de plus léger, il n'y a pas de norme en bash.
 #===============================================================================
 
-# On vérifie que l'on a 2 arguments :
-if [ $# -ne 2 ]
+fichier_urls=$1 # le fichier d'URL en entrée
+fichier_tableau=$2 # le fichier HTML en sortie
+
+
+# ici on doit vérifier que nos deux paramètres existent, sinon on ferme!
+if [[ $# -ne 2 ]]  # si le nombre d'arguments est différent de 2
 then
-	echo " ce programme demande deux arguments"
+	echo "Ce programme demande un argument"
 	exit
 fi
 
-# On vérifie que le fichier d'URLs existe :
-if [ -f $1 ]
-	then
-		echo "Fichier OK"
-	else
-		echo "Ceci n'est pas un fichier valide."
-		exit
-fi
+mot="家庭主妇" # à réfléchir
 
-# On attribue les fichiers en argument à des variables :
-fichier_urls=$1 # le fichier d'URL en entrée
-fichier_tableau=$2 # le fichier HTML en sortie
+# modifier la ligne suivante pour créer effectivement du HTML
+# echo "Je dois devenir du code HTML à partir de la question 3" > $fichier_tableau
 
 echo $fichier_urls;
 basename=$(basename -s .txt $fichier_urls)
 
-# On crée l'architecture HTML du tableau de sortie dans le fichier donné en second argument :
 echo "<html>
-        <head>
-                <meta charset ="utf-8"/>
-                <title> tableau </title>
-                </header>
-                <body>
-                <table>
-                <tr>
-                <th> ligne </th>
-                <th>code</th>
-                <th>URL</th> 
-                <th>encodage</th>
-                </tr>" >$fichier_tableau
+	<head>
+		<meta charset="UTF-8"/>
+	</head>
+	<body>
+		<p>Tableau d'URLS en portugais</p>
+		    <table border=solid width=100%>" > $fichier_tableau
+echo "<h2>Tableau $basename :</h2>" >> $fichier_tableau
+echo "<br/>" >> $fichier_tableau
+echo "<table>" >> $fichier_tableau
+echo "<tr><th>LIGNE</th><th>CODE</th><th>URL</th><th>encodage</th><th>ocurrences</th><th>contexte</th></tr>" >> $fichier_tableau
 
- # On crée un compteur pour les URLs/le nombre de lignes :               
-lineno=1;
+# -d= délimiteur
+# f terminologie table field / champs
 
-# On lit chaque ligne :
-while read -r line;
+lineno=1;  # line number
+while read -r URL;
 do
-	# On récupère l'URL (=la ligne)
-	URL=$line
-	# On récupère le code de réponse :
-	CODEHTTP=$(curl -I -s $line | grep -e "^HTTP/" | grep -Eo "[0-9]{3}" | head -n1)	
-        ENC=$(curl -I -s $line | grep -Po "charset=[\w-]+"| cut -d= -f2)
-	# On ajoute une ligne avec le code de réponse et l'URL au tableau HTML :
-	# Les doubles chevrons permettent de ne pas écraser le fichier de sortie.
-	#echo -e "\tURL : $URL";
-	echo -e "\tURL N°: $lineno";
-	echo -e "\tcode : $CODEHTTP";
-	# Si l'encodage est différent de UTF-8 :
-	if [[ ! $ENC ]]
+	echo -e "\tURL : $URL";
+	
+	# il y a deux options de le faire
+	# code=$(curl --head --silent $URL | grep -i -P -o "^HTTP/" | cut -d " " -f 2 | tail -n 1) # on prendre la dernière ligne 
+	
+	code=$(curl -ILs $URL | grep -e "^HTTP/" | grep -Eo "[0-9]{3}" | tail -n 1) 
+	charset=$(curl -ILs $URL | egrep -o "charset=(\w|-)+" | cut -d= -f2 | tail -n 1) 
+	# -I - pour recuperer l'en-tete, -f2 pour recuperer la deuxieme colonne, -s - mode silencieux
+	
+	aspiration=$(curl -ILs $URL > ./aspirations/$basename-$lineno.html)
+	
+	echo -e "\tcode : $code";
+	
+	if [[ ! $chasert ]] # s'il n'existe pas
 	then
 		echo -e "\tencodage non détecté, on prendra UTF-8 par défaut.";
-		ENC="UTF-8";
+		charset="UTF-8";
 	else
-		echo -e "\tencodage : $ENC";
+		echo -e "\tencodage : $charset";
 	fi
-	# Si le code HTTP est différent de 200
-	if [[ $CODEHTTP -eq 200 ]]
+	
+	if [[ $code -eq 200 ]]
 	then
-		dump=$(lynx -dump -nolist -assume_charset=$charset -display_charset=$ENC $URL)
-		echo "$dump" > "dumps-text/$basename-$lineno.txt" 
-
-		if [[ $ENC -ne "UTF-8" && -n "$dump" ]]
-		then
-			dump=$(echo $dump | iconv -f $ENC -t UTF-8//IGNORE)
+		
+		dump=$(lynx -dump -nolist -assume_charset=$charset -display_charset=$charset $URL)
+		if [[ $chasert -ne "UTF-8" && -n "$dump" ]] # au cas où il n'y a pas cet encodage, on va le convertir
+		then 
+			dump=$(echo $dump | iconv -f $charset -t UTF-8//IGNORE)
 		fi
 	else
-		echo -e "\tCode sortie différent de 200, utilisation d'un dump vide"
+		echo -e "\tcode différent de 200 utilisation d'un dump vide"
 		dump=""
-		charset=""
-	fi
-    
-    echo "<tr><td>$lineno</td><td>$CODEHTTP</td><td>$URL</td><td>$ENC</td></tr>" >> $fichier_tableau
+		chasert=""
+	fi	
+	
+	echo "$dump" > ./dumps_text/fich-$lineno.txt
+	
+# -o isola cada ocorrência na linha, o wc conta só uma vez em cada linha
+	compte=$(grep -E -o $mot ./dumps_text/fich-$lineno.txt | wc -w)	
+	contexte=$(grep -E -A 2 -B 2 $mot ./dumps_text/fich-$lineno.txt)
+	echo $contexte > ./contextes/$basename-$lineno
+	
+	echo "<tr><td>$lineno</td><td>$code</td><td><a href=\"$URL\">$URL</a></td><td>$charset</td><td>$compte</td></tr>" >> $fichier_tableau
+	echo -e "\t--------------------------------"
 	lineno=$((lineno+1));
-                
-       done < $fichier_urls               
-
-        echo "</table></body></html>" >> $fichier_tableau
+	
+done < $fichier_urls
+echo "</table>" >> $fichier_tableau
+echo "</body></html>" >> $fichier_tableau

@@ -1,8 +1,0 @@
-<html><body>
-<h2>Tableau chinois.md :</h2>
-<br/>
-<table>
-<tr><th>ligne</th><th>code</th><th>URL</th><th>encodage</th><th>dump html</th><th>dump text</th><th>occurrences</th><th>contextes</th><th>concordances</th></tr>
-<tr><td>1</td><td>200</td><td><a href="https://www.google.com/search?channel=fs&client=ubuntu&q=%E5%AE%B6%E5%BA%AD%E4%B8%BB%E5%A6%87">https://www.google.com/search?channel=fs&client=ubuntu&q=%E5%AE%B6%E5%BA%AD%E4%B8%BB%E5%A6%87</a></td><td>UTF-8</td><td><a href=../aspirations/fich-1.html>html</a></td><td><a href=../dumps-text/fich-1.txt>text</a></td><td>0</td><td><a href=../contextes/fich-1.txt>contextes</a></td><td><a href=../concordances/chinois.md-1.txt>concordance</a></td></tr>
-</table>
-</body></html>
