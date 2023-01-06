@@ -35,7 +35,7 @@ Cependant, après avoir ouvert le lien, j'ai découvert le problème du mojibake
 
 
 
-##25,novembre 22
+##25,novembre 
 
 Aujourd'hui je reprends le traivl de git et mes devoirs. J'ai reglé le problème que la version de mon responsitory n'est plus la dernière version.
 le cause est que un membre de mon groupe a push un document dans mon git mais je ne le savais pas.
@@ -43,9 +43,13 @@ J'ai reglé le problème par git clone et git pull. J'ai cloné la nouvelle vers
 Ensuite je renouvelle mon journal et le README.
 Maintnant mon git va bien.
 
+#20 décembre
 
-01, décembre 22
+Une membre de notre groupe décide de quitter notre peojet, dans ca cas on décide d'ajouter l'anglais et l'espagnol dans notre traviller. Charlotte s'occupe de trouver les urls d'espagol et moi je prépare les 50 urls d'anglais. J'ai essayé à exercuter le tableau, la pluspart des urls marche, mais il y a certain urls qui ne marche pas, donc il y a beaucoup de chose à ranger. 
 
+
+
+##décembre 22
 Le but d'aujoud'hui
 
 -compte l'occuence.
@@ -59,4 +63,12 @@ dans le commande, nous pouvons utiliser -o signifie "un match par ligne"
 
 on débouche itrameur.
 
-Pour le projet de goupe, je fais le aspiration de ma partie.
+Pour le projet de goupe, je fais le aspiration de ma partie en chinois.
+
+
+
+###5 janvier 2023
+pour le projet  de notre group, les tableaux de espagnol, français et anglais fonctionne bien maintnant, et je prendre le charge de itrameur et nuage de mots de ces trois langues. 
+Parce que le  tableau chinois il y a quand même le problème d'encodage dans l'affichage, donc je traite d'abord itrameur de ces tris langue. 
+problème rencontré : Après que l'itrameur est produit, je trouve qu'il y a des mots outils qui n'a pas un lien avec le sens,  je consulte bien Internet et puis je comprends qu'il faut faire les 
+«stop words» pourque on puis supprimer ces mots. 
