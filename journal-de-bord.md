@@ -33,7 +33,8 @@ Après avoir préparé les urls et exécuté le formulaire complet en utilisant 
  
 Cependant, après avoir ouvert le lien, j'ai découvert le problème du mojibake : après que je ouvre le liens l'affichage des mos sont tous en mojibake. 
 
-
+###problème règler
+Avec l'aide de mon camarade,  je trouve que le problème d'affichage est à cause de mon navigateur safari. Je insatalle Google chrome et renouvre le page de tableux, les texts sont bien affichés. 
 
 ##25,novembre 
 
