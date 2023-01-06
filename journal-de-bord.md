@@ -18,6 +18,18 @@ des remaques d’exercices shell:
 
 
 
+
+
+## l'installation de lynx, curl et wget 
+
+Dans le cours je connais le outil lynx, 
+
+curl 
+wget 
+
+
+
+
 25,novembre 22
 
 Aujourd'hui je reprends le traivl de git et mes devoirs. J'ai reglé le problème que la version de mon responsitory n'est plus la dernière version.
