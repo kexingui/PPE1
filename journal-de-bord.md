@@ -14,9 +14,9 @@ des remaques d’exercices shell:
 2. git status utilisé pour vérifier si git a bien détect la modification.
 
 # séance 3
-"I AM ERROR"
 
 
+##
 
 
 
@@ -27,10 +27,15 @@ Dans le cours je connais le outil lynx,
 curl 
 wget 
 
+## problème de mon tableau chinois
+
+Après avoir préparé les urls et exécuté le formulaire complet en utilisant le script donné par professeur. Le premier problème que j'ai rencontré est qu'après avoir exécuter le script, le tableau, les dossiers dumps, concordances, et le contextes sont bien produits, mais je ne pouvais pas l'ouvrir par les liens du tableau. Après avoir consulté professeur, j'ai compris que le problème était dû à un problème de chemin de fichier dans le script. En modifiant le chemin d'accès au fichier, j'ai pu ouvrir le lien vers les vidages dans le formulaire. 
+ 
+Cependant, après avoir ouvert le lien, j'ai découvert le problème du mojibake : après que je ouvre le liens l'affichage des mos sont tous en mojibake. 
 
 
 
-25,novembre 22
+##25,novembre 22
 
 Aujourd'hui je reprends le traivl de git et mes devoirs. J'ai reglé le problème que la version de mon responsitory n'est plus la dernière version.
 le cause est que un membre de mon groupe a push un document dans mon git mais je ne le savais pas.
