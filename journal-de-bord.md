@@ -1,11 +1,18 @@
 #journal de bord du projet encadré
 #traivail aujoud'aihui_GIT début :)
 
+###Séance 1 
 
-
-
-
-
+J'ai ai fait une connaissance avec shell.  J'apprenais des commands de shell. comme : 
+cd
+mkdir
+pwd
+ls
+echo
+grep
+egrep 
+cat
+ 
 ## Seance 2
 des remaques d’exercices shell:
 1. chaque fois quand on fait la modification sur notre ordinateur ou sur git, il faut qu'on synchroniser les deux.
@@ -13,19 +20,25 @@ des remaques d’exercices shell:
    (## au début de ligne signifie une sous section.)
 2. git status utilisé pour vérifier si git a bien détect la modification.
 
-# séance 3
 
+## 28/09/2022
 
-##
-
+Pendant le cours on a fait la création du repository sur GitHub et des fichiers Readme.md et journal-de-bord.md
+chaque fois quand on veut mettre les dossiers sur girt : 
+git add (nom de dossier)
+git commit -m
+git push
 
 
 ## l'installation de lynx, curl et wget 
 
-Dans le cours je connais le outil lynx, 
-
+Dans le cours je connais le outil 
+lynx
 curl 
 wget 
+
+et on a fait l'installation dans le cours.
+
 
 ## problème de mon tableau chinois
 
@@ -67,15 +80,13 @@ on débouche itrameur.
 Pour le projet de goupe, je fais le aspiration de ma partie en chinois.
 
 
-
 ###5 janvier 2023
 pour le projet  de notre group, les tableaux de espagnol, français et anglais fonctionne bien maintnant, et je prendre le charge de itrameur et nuage de mots de ces trois langues. 
 Parce que le  tableau chinois il y a quand même le problème d'encodage dans l'affichage, donc je traite d'abord itrameur de ces tris langue. 
 problème rencontré : Après que l'itrameur est produit, je trouve qu'il y a des mots outils qui n'a pas un lien avec le sens,  je consulte bien Internet et puis je comprends qu'il faut faire les 
 «stop words» pourque on puis supprimer ces mots. 
 
-# 6 janvier
- Kexin: 
+# 6 janvier 
  Afin d'éliminer les mots vides, j'utilise le programme python nltk. j'installe le stop liste de nltk, cela fonnction pour anglais, beaucoup de mots vides sont éliminés. 
  Mais pour français et espagnol, nitk n'est pas très efficace, il reste beaucoup de mot désagréable. Dans ce cas je trouve les autres liste de stopwords sur Internet mais ils ne fonctionnent non plus. 
  Pour le corpus chinois, il faut d'abord faire la segmention et puis éliminer les mots vide. j'ai essayé le script thulac donné par prof, mais ce script il me donne un text un peu bizzar, les mots sont separé mais il y a des "/"ajouté entre les mots séparés.
